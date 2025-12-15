@@ -64,10 +64,16 @@ COLLECTION_TYPE=api::category.category
 ```
 
 ## Ejecucion de pruebas
-
+### Todos los scripts de tests
 ```bash
 # En Windows / Mac / Linux
 python main.py
+```
+
+### Un script de tests
+```bash
+# En Windows / Mac / Linux
+python .\tests\test_strapi.py
 ```
 
 ## Estructura del Proyecto
@@ -75,16 +81,20 @@ python main.py
 El proyecto sigue el patrón de diseño **Page Object Model (POM)** para separar la lógica de prueba de la interfaz de usuario:
 
 ```text
-proyecto/
-├── reports/
-│   └── screenshots/       # Almacén de evidencias (capturas automáticas)
-├── pages/                 # Paquete Page Object Model
-│   ├── __init__.py
-│   ├── base_page.py       # Clase Padre: Métodos comunes (esperas, clicks, inputs)
-│   ├── login_page.py      # Lógica de la página de Login
-│   └── content_page.py    # Lógica de creación y edición de contenido
-├── .env                   # Archivo de configuración (NO compartir)
-├── main.py                # Script principal (Test Case, Asserts y Ejecución)
+PROYECTO/
+├── .env                  # Variables de entorno (Credenciales, URL)
+├── main.py               # Orquestador: Ejecuta todos los tests
+├── reports/              # Carpeta generada automáticamente
+│   ├── automation.log    # Registro detallado de eventos
+│   └── screenshots/      # Evidencia visual de fallos y éxitos
+├── pages/                # CAPA DE ABSTRACCIÓN (Page Objects)
+│   ├── __init__.py       # Marca la carpeta como paquete Python
+│   ├── base_page.py      # Clase Padre: Métodos comunes (wrappers)
+│   ├── login_page.py     # Lógica específica del Login
+│   └── content_page.py   # Lógica compleja de creación/edición
+└── tests/                # CAPA DE EJECUCIÓN
+    ├── __init__.py
+    └── test_strapi.py    # Casos de prueba (CP-01 a CP-06)
 ├── requirements.txt       # Dependencias del proyecto
 └── README.md              # Documentación
 ```
